@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/angular-widgets/angular-jqm.png)](https://travis-ci.org/angular-widgets/angular-jqm)
 #Angular-JQM
 
+**Update Feb 2014: This project is currently not under development.  If you wish to take it up and finish it (angular-1.2 branch is nearly ready), please email andytjoslin@gmail.com**
+
 This project has not been released yet. It is still in alpha stage, but it is usable in an app if you are willing to face a few API changes here and there.
 
 * Docs: http://angular-widgets.github.io/angular-jqm/master/docs
