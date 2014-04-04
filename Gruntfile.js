@@ -86,6 +86,20 @@ module.exports = function(grunt) {
           }
         }
       },
+      ci: {
+          files: {
+              src: ['src/**/*.js']
+          },
+          options: {
+              globals: {
+                  angular: true,
+                  window: true
+              },
+              force: true,
+              reporter: 'checkstyle',
+              reporterOutput: "coverage/checkstyle.xml"
+          }
+      },
       test: {
         files: {
           src: ['test/unit/**/*.js']
@@ -176,7 +190,7 @@ module.exports = function(grunt) {
               coverageReporter: {
                   reporters:[
                       {type: 'html', dir:'coverage/'},
-                      {type: 'cobertura', dir:'coverage'}
+                      {type: 'cobertura'}
                   ]
               },
               junitReporter: {
@@ -255,7 +269,7 @@ module.exports = function(grunt) {
     install();
   });
   grunt.registerTask('curl', 'curl-dir'); //alias
-  grunt.registerTask('ci', ['build','jshint','karma:ci','ngdocs']);
+  grunt.registerTask('ci', ['build','jshint:ci','karma:ci','ngdocs']);
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
