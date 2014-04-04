@@ -141,8 +141,8 @@ module.exports = function(grunt) {
                 'test/**/*Spec.js',
                 {pattern: 'test/**/*', watched: true, included: false, served: true},
                 {pattern: 'components/**/*', watched: true, included: false, served: true}],
-        preprocessors : {'**/src/*.js': 'coverage'},
-        reporters: [process.env.TRAVIS ? 'dots' : 'progress', 'coverage'] //dots look better on travis log
+
+        reporters: [process.env.TRAVIS ? 'dots' : 'progress'] //dots look better on travis log
       },
       dev: {
         options: {
@@ -167,6 +167,22 @@ module.exports = function(grunt) {
            //Travis CI has firefox, we use it
           browsers: [process.env.TRAVIS ? 'Firefox' : 'PhantomJS']
         }
+      },
+      ci: {
+          options: {
+              singleRun: true,
+              preprocessors : {'**/src/**/*.js': ['coverage']},
+              reporters: ['dots', 'coverage', 'junit'],
+              coverageReporter: {
+                  reporters:[
+                      {type: 'html', dir:'coverage/'},
+                      {type: 'cobertura', dir:'coverage'}
+                  ]
+              },
+              junitReporter: {
+                  outputFile: 'test-results/test-results.xml'
+              }
+          }
       }
 
     },
@@ -239,6 +255,7 @@ module.exports = function(grunt) {
     install();
   });
   grunt.registerTask('curl', 'curl-dir'); //alias
+  grunt.registerTask('ci', ['build','jshint','karma:ci','ngdocs']);
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
