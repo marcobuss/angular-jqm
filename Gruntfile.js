@@ -88,7 +88,7 @@ module.exports = function(grunt) {
       },
       ci: {
           files: {
-              src: ['src/**/*.js']
+              src: ['<%= concat.nodeps.dest %>']
           },
           options: {
               globals: {
