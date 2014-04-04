@@ -141,7 +141,8 @@ module.exports = function(grunt) {
                 'test/**/*Spec.js',
                 {pattern: 'test/**/*', watched: true, included: false, served: true},
                 {pattern: 'components/**/*', watched: true, included: false, served: true}],
-        reporters: [process.env.TRAVIS ? 'dots' : 'progress'] //dots look better on travis log
+        preprocessors : {'**/src/*.js': 'coverage'},
+        reporters: [process.env.TRAVIS ? 'dots' : 'progress', 'coverage'] //dots look better on travis log
       },
       dev: {
         options: {
@@ -167,6 +168,7 @@ module.exports = function(grunt) {
           browsers: [process.env.TRAVIS ? 'Firefox' : 'PhantomJS']
         }
       }
+
     },
     changelog: {
       dest: 'CHANGELOG.md'
@@ -200,7 +202,7 @@ module.exports = function(grunt) {
       api: {
         src: ['src/**/*.js', 'docs/content/api/**/*.ngdoc'],
         title: 'API Documentation'
-      },
+      }
 
     },
 
