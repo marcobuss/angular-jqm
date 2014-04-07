@@ -269,7 +269,7 @@ module.exports = function(grunt) {
     install();
   });
   grunt.registerTask('curl', 'curl-dir'); //alias
-  grunt.registerTask('ci', ['build','jshint:ci','karma:ci','ngdocs']);
+  grunt.registerTask('ci', ['build','karma:ci','ngdocs']);
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
