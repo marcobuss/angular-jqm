@@ -190,7 +190,7 @@ module.exports = function(grunt) {
               coverageReporter: {
                   reporters:[
                       {type: 'html', dir:'coverage/'},
-                      {type: 'lcov', dir:'lcov/'},
+                      {type: 'lcov'},
                       {type: 'cobertura'}
                   ]
               },
@@ -237,6 +237,14 @@ module.exports = function(grunt) {
 
     },
 
+    copy: {
+        ci: {
+            files: [
+                { expand: true, flatten: true, src: ['coverage/**/lcov.info'], dest: 'lcov/', filter: 'isFile'}
+            ]
+        }
+    },
+
     //After lots of bower problems, we switched to grunt-curl
     //We will switch back to bower once bower-1.1.2 resolves its problems with zip files
     'curl-dir': {
@@ -270,7 +278,7 @@ module.exports = function(grunt) {
     install();
   });
   grunt.registerTask('curl', 'curl-dir'); //alias
-  grunt.registerTask('ci', ['build','jshint:ci','karma:ci','ngdocs']);
+  grunt.registerTask('ci', ['build','jshint:ci','karma:ci','ngdocs', 'copy:ci']);
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -282,6 +290,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngdocs');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadTasks('build/grunt');
 
   function install() {
