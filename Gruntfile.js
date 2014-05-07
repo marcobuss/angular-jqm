@@ -189,7 +189,8 @@ module.exports = function(grunt) {
               reporters: ['dots', 'coverage', 'junit'],
               coverageReporter: {
                   reporters:[
-                      //{type: 'html', dir:'coverage/'},
+                      {type: 'html', dir:'coverage/'},
+                      {type: 'lcov'},
                       {type: 'cobertura'}
                   ]
               },
